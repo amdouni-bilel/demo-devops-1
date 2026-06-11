@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: demo-devops
+  namespace: demo-devops
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: demo-devops
+
+  template:
+    metadata:
+      labels:
+        app: demo-devops
+
+    spec:
+      containers:
+        - name: app
+
+          image: demo-devops:1.0
+
+          imagePullPolicy: Never
+
+          ports:
+            - containerPort: 8080
+
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
